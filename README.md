@@ -7,7 +7,7 @@
 ![POSIX](https://img.shields.io/badge/POSIX-compliant-orange?style=for-the-badge)
 ![Shell](https://img.shields.io/badge/shell-sh-lightgrey?style=for-the-badge)
 
-**Professional ASN Reconnaissance & Network Mapping for Security Researchers**
+**Advanced ASN Reconnaissance for Security Researchers**
 
 [Features](#-features) • [Installation](#-installation) • [Quick Start](#-quick-start) • [Examples](#-examples) • [Documentation](#-documentation)
 
@@ -17,7 +17,7 @@
 
 ## 🎯 What is ASNSPY?
 
-ASNSPY is a comprehensive reconnaissance tool that maps **entire Autonomous Systems (ASNs)** to discover infrastructure, identify security vulnerabilities, and analyze network architecture. Unlike traditional domain-focused scanners, ASNSPY approaches security assessment from the network level - giving you complete visibility into an organization's external attack surface.
+ASNSPY is a comprehensive reconnaissance tool that maps entire Autonomous Systems (ASNs) to discover infrastructure, identify security vulnerabilities, and analyze network architecture. Unlike traditional domain-focused scanners, ASNSPY approaches security assessment from the network level, giving you complete visibility into an organization's external attack surface.
 
 **Think of it as:**
 - 🔍 **nmap** for ASN-level reconnaissance
@@ -27,7 +27,7 @@ ASNSPY is a comprehensive reconnaissance tool that maps **entire Autonomous Syst
 
 ### Why ASN-Focused Scanning Matters
 
-Most security tools start with domains. ASNSPY starts with **network ownership**:
+Most security tools start with domains. ASNSPY starts with network ownership:
 
 ```
 Traditional Approach:           ASNSPY Approach:
@@ -41,7 +41,7 @@ domain.com                      AS15169 (Google)
                                   └── Infrastructure topology
 ```
 
-**The difference?** You discover infrastructure the organization might not even know exists.
+You discover infrastructure the organization might not even know exists.
 
 ---
 
@@ -54,22 +54,22 @@ ASNSPY combines multiple reconnaissance phases into a single, powerful workflow:
 - **Prefix Enumeration** - All IPv4/IPv6 network blocks owned by the ASN
 - **RIPE/ARIN Integration** - Authoritative data from regional registries
 
-**Why this matters:** Know exactly what infrastructure belongs to your target before you scan a single IP.
+Know exactly what infrastructure belongs to your target before you scan a single IP.
 
 ### 🌐 Network Discovery & Mapping
 - **PTR Record Enumeration** - Reverse DNS for every IP in the ASN
 - **Domain Extraction** - Automatically discover all domains
-- **Smart Filtering** - Skip dead space (.0, .255), focus on real infrastructure
+- **Smart Filtering** - Skip dead space, focus on real infrastructure
 - **Resume Capability** - Pick up where you left off on large scans
 
-**Why this matters:** Traditional recon finds `www.company.com`. ASNSPY finds `old-admin-panel.company.com`, `staging-api.company.com`, `vpn-legacy.company.com` - the forgotten assets attackers love.
+Traditional recon finds `www.company.com`. ASNSPY finds `old-admin-panel.company.com`, `staging-api.company.com`, `vpn-legacy.company.com` - the forgotten assets attackers love.
 
 ### 🛣️ Network Path Analysis
 - **Traceroute with ASN Attribution** - See routing paths and ownership
 - **Hop-by-hop Analysis** - Identify transit providers, peering points
 - **Network Topology Mapping** - Understand infrastructure architecture
 
-**Why this matters:** Discover network segmentation, find backup routes, identify single points of failure.
+Discover network segmentation, find backup routes, identify single points of failure.
 
 ### 🔐 TLS Certificate Intelligence
 - **Complete Certificate Analysis** - CN, SANs, issuer, validity
@@ -78,7 +78,7 @@ ASNSPY combines multiple reconnaissance phases into a single, powerful workflow:
 - **Weak Crypto Detection** - Flag outdated algorithms
 - **Certificate Transparency** - Subdomain enumeration via CT logs
 
-**Why this matters:** Certificates leak infrastructure details. A cert for `internal-api.company.com` tells you it exists - even if DNS doesn't resolve publicly.
+Certificates leak infrastructure details. A cert for `internal-api.company.com` tells you it exists - even if DNS doesn't resolve publicly.
 
 ### 🔓 Port Scanning & Service Detection
 - **Comprehensive Port Discovery** - Full TCP connect scans
@@ -86,7 +86,7 @@ ASNSPY combines multiple reconnaissance phases into a single, powerful workflow:
 - **Service Fingerprinting** - HTTP server version detection
 - **Banner Grabbing** - Identify running services
 
-**Why this matters:** You can't hack what you can't see. Find the forgotten FTP server, the old MySQL instance, the development Redis exposed to the internet.
+You can't hack what you can't see. Find the forgotten FTP server, the old MySQL instance, the development Redis exposed to the internet.
 
 ### 🚨 CVE Vulnerability Detection
 - **Automated CVE Lookup** - Query NVD database for known vulnerabilities
@@ -94,7 +94,7 @@ ASNSPY combines multiple reconnaissance phases into a single, powerful workflow:
 - **Severity Filtering** - Focus on CRITICAL/HIGH findings
 - **Real-time Updates** - Uses latest NVD API data
 
-**Why this matters:** Bridge the gap between reconnaissance and exploitation. Find the Apache 2.4.49 server vulnerable to path traversal, the outdated WordPress, the unpatched IIS.
+Bridge the gap between reconnaissance and exploitation. Find the Apache 2.4.49 server vulnerable to path traversal, the outdated WordPress, the unpatched IIS.
 
 ### 💣 Security Leak Detection
 - **Exposed Configuration Files** - `.env`, `config.yml`, `.git/config`
@@ -102,21 +102,22 @@ ASNSPY combines multiple reconnaissance phases into a single, powerful workflow:
 - **Backup File Discovery** - `backup.sql`, `database.dump`
 - **Debug Endpoints** - `phpinfo.php`, `server-status`
 
-**Why this matters:** The #1 source of critical vulnerabilities. One exposed `.env` file = game over.
+The #1 source of critical vulnerabilities. One exposed `.env` file = game over.
 
 ### 🔒 HTTP Security Analysis
 - **Security Headers** - HSTS, CSP, X-Frame-Options analysis
 - **Missing Protections** - Identify unprotected endpoints
-- **Best Practice Compliance** - Compare against OWASP standards
+- **A-F Grading System** - OWASP standards compliance
+- **100-Point Scoring** - Detailed security posture assessment
 
-**Why this matters:** Missing security headers = easy wins for attackers. Clickjacking, XSS, and protocol downgrade attacks become trivial.
+Missing security headers = easy wins for attackers. Clickjacking, XSS, and protocol downgrade attacks become trivial.
 
 ### ☁️ Cloud Provider Detection
 - **AWS/Azure/GCP Identification** - Automatic cloud infrastructure mapping
 - **Multi-Cloud Discovery** - DigitalOcean, Cloudflare, Linode, OVH
 - **Infrastructure Analysis** - Understand hosting strategy
 
-**Why this matters:** Cloud misconfigurations are the #1 breach vector. Know what's in AWS so you can check for open S3 buckets, exposed RDS instances, misconfigured security groups.
+Cloud misconfigurations are the #1 breach vector. Know what's in AWS so you can check for open S3 buckets, exposed RDS instances, misconfigured security groups.
 
 ### 📊 Professional Output Formats
 - **CSV Export** - Easy analysis in spreadsheets
@@ -124,7 +125,7 @@ ASNSPY combines multiple reconnaissance phases into a single, powerful workflow:
 - **Structured Reports** - Human-readable summaries
 - **Raw Data** - Complete output for deep analysis
 
-**Why this matters:** Your recon data is only useful if you can analyze it. Export to Splunk, import to Elasticsearch, analyze in Jupyter notebooks.
+Your recon data is only useful if you can analyze it. Export to Splunk, import to Elasticsearch, analyze in Jupyter notebooks.
 
 ---
 
@@ -433,13 +434,11 @@ cat scans/AS12876_*/domains.txt | grep -E "phishing|scam|fake"
 ### Combining Features
 
 ```bash
-# TLS + Version + CVE pipeline
 ./asnspy.sh AS15169 \
   --tls --tls-mode ptr \
   --version-detect \
   --cve --cve-min-severity HIGH
 
-# Complete security audit
 ./asnspy.sh AS15169 \
   --port-scan --port-scan-top 1000 \
   --tls \
@@ -450,7 +449,6 @@ cat scans/AS12876_*/domains.txt | grep -E "phishing|scam|fake"
   --cloud-detect \
   --json
 
-# Network analysis focus
 ./asnspy.sh AS15169 \
   --trace --trace-mode all \
   --ct \
@@ -480,24 +478,24 @@ cat scans/AS12876_*/domains.txt | grep -E "phishing|scam|fake"
 Every scan creates a timestamped directory:
 ```
 scans/AS15169_a7f3d9e2/
-├── prefixes.txt              # IP ranges (8.8.8.0/24, 8.8.4.0/24, ...)
-├── ptr_results.txt           # IP,hostname (8.8.8.8,dns.google)
-├── domains.txt               # Unique domains (google.com, dns.google, ...)
-├── ct_results.txt            # CT log subdomains
-├── traceroute_results.txt    # Network paths (CSV format)
-├── tls_certificates.csv      # Certificate details
-├── server_versions.csv       # Detected software versions
-├── port_scan_results.csv     # Open ports
-├── vulnerabilities.csv       # CVE findings
-├── leak_exposures.csv        # Exposed configs/credentials
-├── http_security.csv         # Security header analysis
-├── cloud_providers.csv       # Cloud infrastructure mapping
+├── prefixes.txt
+├── ptr_results.txt
+├── domains.txt
+├── ct_results.txt
+├── traceroute_results.txt
+├── tls_certificates.csv
+├── server_versions.csv
+├── port_scan_results.csv
+├── vulnerabilities.csv
+├── leak_exposures.csv
+├── http_security.csv
+├── cloud_providers.csv
 └── json/
-    ├── summary.json          # Complete scan summary
-    ├── prefixes.json         # Structured prefix data
-    ├── vulnerabilities.json  # CVE details
-    ├── tls_certificates.json # Certificate data
-    └── ...                   # All data in JSON format
+    ├── summary.json
+    ├── prefixes.json
+    ├── vulnerabilities.json
+    ├── tls_certificates.json
+    └── ...
 ```
 
 ### Analysis Examples
@@ -619,78 +617,187 @@ Penalties include fines and imprisonment.
 
 ## 🆚 Open Source vs Enterprise
 
-### What's Included FREE in Open Source
+### What's Included in Open Source
 
-ASNSPY Open Source is **not a demo** - it's a complete, professional tool:
+ASNSPY Open Source is a complete, professional reconnaissance tool - not a crippled demo:
 
-- ✅ **All Scanning Capabilities** (unrestricted)
-- ✅ **CVE Vulnerability Detection** (full NVD integration)
-- ✅ **Leak/Credential Detection** (complete pattern matching)
-- ✅ **TLS Certificate Analysis** (comprehensive)
-- ✅ **Port Scanning** (all ports, all modes)
-- ✅ **Version Detection** (HTTP fingerprinting)
-- ✅ **Cloud Provider Detection** (AWS, Azure, GCP, etc.)
-- ✅ **HTTP Security Analysis** (header checks)
-- ✅ **Network Tracing** (with ASN attribution)
-- ✅ **Certificate Transparency** (subdomain enumeration)
-- ✅ **JSON Export** (structured data)
-- ✅ **Parallel Processing** (unlimited concurrency)
-- ✅ **Resume Capability** (large scan support)
-- ✅ **All Scan Profiles** (quick, deep, security, stealth)
+**Core Scanning (100% Unrestricted)**
+- ✅ ASN Intelligence Gathering (WHOIS, prefixes)
+- ✅ PTR Record Enumeration (all IPs)
+- ✅ Domain Extraction (unlimited)
+- ✅ Certificate Transparency (CT log queries)
+- ✅ Network Path Tracing (traceroute with ASN lookup)
+- ✅ TLS Certificate Analysis (expiry, weak crypto, self-signed)
+- ✅ Port Scanning (TCP connect, all ports)
+- ✅ HTTP Server Version Detection (fingerprinting)
+- ✅ CVE Vulnerability Detection (NVD integration)
+- ✅ HTTP Security Headers (A-F grading)
+- ✅ Cloud Provider Detection (AWS, Azure, GCP, etc.)
+- ✅ Security Leak Detection (configs, credentials, banners)
 
-**No artificial limits. No crippled features. No pay walls.**
+**Features & Capabilities**
+- ✅ Parallel Processing (unlimited concurrency)
+- ✅ All Scan Profiles (quick, standard, deep, stealth, security)
+- ✅ Resume Capability (large scan support)
+- ✅ Filtering Options (dead hosts, gateway-only, IP ranges)
+- ✅ JSON Export (structured data for all findings)
+- ✅ Configuration Files (.asnspyrc support)
+- ✅ IPv4 and IPv6 Support
+- ✅ Multiple Scan Modes (ptr, all, gateway)
 
-### Enterprise Features
+**No Artificial Limitations**
+- No scan count limits
+- No IP address limits
+- No time restrictions
+- No feature paywalls
+- No "premium" tiers for core functionality
 
-Enterprise ASNSPY transforms point-in-time scans into continuous security intelligence:
+### Enterprise-Only Features
 
-**Scale & Automation**
-- ASN Range Scanning: Scan AS13335-AS99999 in one command
-- Scheduling: Automated daily/weekly scans with error handling
-- API Access: RESTful API for programmatic integration
-- Bulk Operations: Campaign management for hundreds of targets
+Enterprise ASNSPY adds **operational automation** and **enterprise integration** - it doesn't just "unlock" existing features:
 
-**Enterprise Integration**
-- SIEM Connectors: Splunk, Elasticsearch, QRadar, ArcSight, Graylog, Sumo Logic
-- Webhook Notifications: Slack, Discord, Teams, PagerDuty, custom endpoints
-- Database Backend: PostgreSQL, MySQL with 12+ months historical data
-- SSO/RBAC: SAML, OAuth, role-based access control
+**ASN Range Scanning**
+```bash
+./asnspy.sh --asn-range AS13335-AS13340 --fetch-prefixes
+```
+Scan multiple ASNs in batch operations. Useful for:
+- Industry-wide reconnaissance (scan all ISPs)
+- Subsidiary mapping (parent company + acquisitions)
+- Competitive analysis (scan multiple competitors)
+- Managed service providers (multi-tenant monitoring)
 
-**Intelligence & Analytics**
-- Diff Mode: Automated change detection between scans
-- Trending: Historical analysis and pattern recognition
-- Asset Inventory: Centralized database of discovered infrastructure
-- Vulnerability Tracking: Track findings from discovery through remediation
-- Analytics Dashboard: Web-based visualization and reporting
+**SIEM Integration (Real-time Event Streaming)**
+```bash
+./asnspy.sh AS15169 --profile security \
+  --siem splunk --siem-host splunk.company.com:8088 \
+  --siem-token YOUR_HEC_TOKEN --siem-index security
+```
+Send findings directly to your SIEM platform as they're discovered:
+- **Supported platforms:** Splunk (HEC), Elasticsearch, QRadar, ArcSight, Graylog, Sumo Logic, Syslog
+- **Real-time streaming:** Events sent as discovered (not batch)
+- **Structured formats:** HEC, GELF, CEF, ECS
+- **Use case:** Security operations centers, compliance monitoring, threat hunting
 
-**Compliance & Reporting**
-- Compliance Templates: PCI-DSS, SOC2, ISO 27001, NIST
-- PDF Reports: Automated executive and technical report generation
-- Audit Trails: Complete activity logging for compliance
-- SLA Tracking: Measure mean-time-to-remediation
+**Webhook Notifications**
+```bash
+./asnspy.sh AS15169 --profile security \
+  --webhook https://hooks.slack.com/YOUR/WEBHOOK \
+  --webhook-type slack \
+  --webhook-events scan_complete,critical_finding
+```
+Get instant alerts for scan completion and critical findings:
+- **Supported services:** Slack, Discord, Microsoft Teams, PagerDuty, generic webhooks
+- **Event types:** scan_start, scan_complete, critical_finding, error
+- **Severity filtering:** Only alert on CRITICAL/HIGH findings
+- **Use case:** Team notifications, incident response, change management
 
-**Support**
-- Priority Support: Email and phone with SLA
-- Training: Live onboarding sessions
-- Custom Integrations: Professional services available
-- Dedicated CSM: Customer success manager
+**Database Backend (Scan History & Trending)**
+```bash
+./asnspy.sh AS15169 --profile security \
+  --database --db-type postgresql \
+  --db-host db.company.com --db-user scanner --db-pass secret
+```
+Store all scan results in a database for historical analysis:
+- **Supported databases:** SQLite (single-user), PostgreSQL (enterprise), MySQL
+- **Capabilities:** 
+  - Scan history tracking (every scan stored)
+  - Vulnerability trending over time
+  - Asset inventory (centralized IP/hostname database)
+  - Certificate expiry monitoring
+  - Finding lifecycle management (discovery → remediation)
+- **Use case:** Compliance reporting, SLA tracking, executive dashboards
+
+**Diff Mode (Change Detection)**
+```bash
+./asnspy.sh AS15169 --profile security \
+  --database --diff LATEST \
+  --webhook https://hooks.slack.com/YOUR/WEBHOOK
+```
+Automatically detect changes between scans:
+- **Detects:** New/removed assets, new/resolved vulnerabilities, port changes, certificate expiry
+- **Requires:** Database backend enabled
+- **Baselines:** Compare against LATEST scan or specific scan ID
+- **Alerts:** Automatic notifications for new CRITICAL findings
+- **Use case:** Continuous monitoring, change detection, compliance drift
+
+**Why These Are Enterprise-Only**
+
+These features require **infrastructure** and **integration** beyond a single shell script:
+
+1. **ASN Range Scanning** - Batch orchestration, parallel ASN lookups, multi-WHOIS parsing
+2. **SIEM Integration** - 8 different platform APIs, authentication handling, retry logic
+3. **Webhooks** - 5 different message formats, event routing, notification management
+4. **Database** - Schema management, migrations, query optimization, multi-user support
+5. **Diff Mode** - Change detection algorithms, baseline management, alert rules
+
+Building these yourself = 6-12 months dev time = $300,000-$600,000
 
 ### Why Upgrade to Enterprise?
 
-**Manual approach with Open Source:**
-- 18 hours per week of manual work
-- Annual cost: $117,000 (at $125/hour)
+**The Challenge with Open Source**
 
-**Automated Enterprise approach:**
-- 0 hours per week
-- Annual cost: $10,000
+Running ASNSPY OSS in production requires manual work:
+
+**Weekly security scan routine:**
+- Run scan: 2 hours
+- Parse CSV files: 2 hours
+- Compare with last week (spreadsheets): 3 hours
+- Generate reports for management: 4 hours
+- Track remediation in tickets: 3 hours
+- Alert teams on critical findings: 2 hours
+- Update asset inventory: 2 hours
+
+**Total: 18 hours/week = $117,000/year** (at $125/hour)
+
+**With Enterprise:**
+- Automated scheduled scans: 0 hours
+- SIEM integration (auto-parsed): 0 hours
+- Automated change detection: 0 hours
+- Auto-generated reports: 0 hours
+- Webhook alerts: 0 hours
+- Database asset inventory: 0 hours
+
+**Total: 0 hours/week = $10,000/year license**
 
 **Annual savings: $107,000**
 
-Alternatively, building these capabilities in-house requires:
-- 6-12 months of development time
-- Engineering cost: $300,000-$600,000
-- Ongoing maintenance and updates
+### Real-World Example
+
+**Mid-sized security team scenario:**
+
+Company with 5 ASNs, weekly security scans:
+
+**Open Source approach:**
+```bash
+./asnspy.sh AS12345 --profile security --json
+./asnspy.sh AS12346 --profile security --json
+./asnspy.sh AS12347 --profile security --json
+./asnspy.sh AS12348 --profile security --json
+./asnspy.sh AS12349 --profile security --json
+```
+Then manually:
+- Import 5 JSON files into spreadsheet
+- Compare with previous week's data
+- Identify new vulnerabilities
+- Email teams about critical findings
+- Update Jira tickets
+- Copy data to Splunk
+- Generate weekly report for CISO
+
+**Enterprise approach:**
+```bash
+./asnspy.sh --asn-range AS12345-AS12349 --profile security \
+  --database --diff LATEST \
+  --siem splunk --siem-host splunk.company.com:8088 \
+  --webhook https://hooks.slack.com/YOUR/WEBHOOK \
+  --webhook-events critical_finding
+```
+Then:
+- Nothing. It's automated.
+- Slack alerts on new CRITICAL findings
+- Splunk ingests all data automatically
+- Database tracks changes week-over-week
+- Query database for CISO report
 
 **Learn more:** [https://asnspy.com/enterprise](https://asnspy.com/enterprise)
 
@@ -698,22 +805,23 @@ Alternatively, building these capabilities in-house requires:
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to help:
+We welcome contributions from the security community.
 
 ### Areas We Need Help
-- 🐛 **Bug Reports** - Find issues, report them
-- 📖 **Documentation** - Improve guides, add examples
-- ✨ **Features** - Additional CVE sources, cloud providers
-- 🧪 **Testing** - More platforms, edge cases
-- 🌍 **Translations** - Internationalization
+- Bug reports and issue identification
+- Documentation improvements and examples
+- Additional CVE data sources
+- Cloud provider detection expansion
+- Testing on additional platforms
+- Internationalization and translations
 
 ### How to Contribute
 
-1. **Fork the repository**
-2. **Create feature branch** (`git checkout -b feature/amazing-feature`)
-3. **Commit changes** (`git commit -m 'Add amazing feature'`)
-4. **Push to branch** (`git push origin feature/amazing-feature`)
-5. **Open Pull Request**
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
 ### Code Standards
 - ✅ POSIX-compliant (no bashisms)
@@ -726,33 +834,33 @@ We welcome contributions! Here's how to help:
 
 ## 📚 Documentation
 
-- **[Installation Guide](https://github.com/ASNSPY/asnspy-oss/blob/main/INSTALL.md)** - Detailed setup for every platform
-- **[Enterprise Comparison](https://github.com/ASNSPY/asnspy-oss/blob/main/ENTERPRISE_COMPARISON.md)** - Feature comparison & ROI
-- **[Removed Modules](https://github.com/ASNSPY/asnspy-oss/blob/main/REMOVED_MODULES.md)** - Technical details on OSS vs Enterprise
-- **[Changelog](https://github.com/ASNSPY/asnspy-oss/blob/main/CHANGELOG.md)** - Version history
-- **[Contributing](https://github.com/ASNSPY/asnspy-oss/blob/main/CONTRIBUTING.md)** - How to contribute
+- [Installation Guide](https://github.com/ASNSPY/asnspy-oss/blob/main/INSTALL.md) - Detailed setup for every platform
+- [Enterprise Comparison](https://github.com/ASNSPY/asnspy-oss/blob/main/ENTERPRISE_COMPARISON.md) - Feature comparison & ROI
+- [Removed Modules](https://github.com/ASNSPY/asnspy-oss/blob/main/REMOVED_MODULES.md) - Technical details on OSS vs Enterprise
+- [Changelog](https://github.com/ASNSPY/asnspy-oss/blob/main/CHANGELOG.md) - Version history
+- [Contributing](https://github.com/ASNSPY/asnspy-oss/blob/main/CONTRIBUTING.md) - How to contribute
 
 ---
 
 ## 🗺️ Roadmap
 
-### Near Term (Q1 2024)
-- [ ] Additional CVE data sources (Vulners, CVE.org)
-- [ ] IPv6 scanning improvements
-- [ ] Performance optimizations
-- [ ] Additional cloud provider detection (DigitalOcean, Linode, Vultr)
+### Near Term (Q1 2025)
+- Additional CVE data sources (Vulners, CVE.org)
+- IPv6 scanning improvements
+- Performance optimizations
+- Additional cloud provider detection
 
-### Medium Term (Q2-Q3 2024)
-- [ ] HTML report generation
-- [ ] GraphQL API scanning
-- [ ] Kubernetes cluster detection
-- [ ] Container registry scanning
+### Medium Term (Q2-Q3 2025)
+- HTML report generation
+- GraphQL API scanning
+- Kubernetes cluster detection
+- Container registry scanning
 
-### Long Term (Q4 2024+)
-- [ ] GUI interface (community contribution welcome)
-- [ ] Machine learning for anomaly detection
-- [ ] Threat intelligence integration
-- [ ] Mobile app (iOS/Android)
+### Long Term (Q4 2025+)
+- GUI interface (community contribution welcome)
+- Machine learning for anomaly detection
+- Threat intelligence integration
+- Mobile app (iOS/Android)
 
 **Vote on features:** [GitHub Discussions](https://github.com/ASNSPY/asnspy-oss/discussions)
 
@@ -763,7 +871,7 @@ We welcome contributions! Here's how to help:
 ### Community Support
 - **GitHub Issues:** [Report bugs, request features](https://github.com/ASNSPY/asnspy-oss/issues)
 - **GitHub Discussions:** [Ask questions, share tips](https://github.com/ASNSPY/asnspy-oss/discussions)
-- **Discord:** [Join the community](https://discord.gg/asnspy) (coming soon)
+- **Discord:** [Join the community](https://discord.gg/asnspy)
 
 ### Enterprise Support
 - **Website:** [https://asnspy.com](https://asnspy.com)
@@ -785,19 +893,19 @@ Free for personal and commercial use. No restrictions.
 
 ASNSPY is built on the shoulders of giants:
 
-- **RIPE NCC** - ASN and prefix data
-- **NVD (NIST)** - CVE vulnerability database
-- **Certificate Transparency** - Google's CT log infrastructure
-- **Team Cymru** - IP-to-ASN mapping
-- **IANA** - Internet number resources
+**Data Sources:**
+- RIPE NCC - ASN and prefix data
+- NVD (NIST) - CVE vulnerability database
+- Certificate Transparency - Google's CT log infrastructure
+- Team Cymru - IP-to-ASN mapping
 
-### Built With
+**Built With:**
 - `curl` - HTTP client
 - `jq` - JSON processor
 - `openssl` - TLS/crypto operations
 - `traceroute` - Network path analysis
 
-### Inspired By
+**Inspired By:**
 - **nmap** - Port scanning methodology
 - **Amass** - Subdomain enumeration approach
 - **Shodan** - Internet-wide scanning concepts
@@ -845,499 +953,3 @@ cd asnspy-oss
 [⬆ Back to Top](#asnspy---open-source-edition)
 
 </div>
-
-## 📥 Installation
-
-### Quick Install (Any System)
-```bash
-# Clone and run
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-./asnspy.sh AS15169
-```
-
-### Ubuntu / Debian / Mint / Pop!_OS
-```bash
-sudo apt update
-sudo apt install -y curl jq dnsutils traceroute openssl util-linux whois netcat-openbsd
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### RHEL / CentOS / Rocky Linux / AlmaLinux
-```bash
-sudo yum install -y curl jq bind-utils traceroute openssl util-linux whois nc
-# Or on newer versions:
-sudo dnf install -y curl jq bind-utils traceroute openssl util-linux whois nc
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Fedora
-```bash
-sudo dnf install -y curl jq bind-utils traceroute openssl util-linux whois nc git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Arch Linux / Manjaro
-```bash
-sudo pacman -S curl jq bind traceroute openssl util-linux whois gnu-netcat git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### openSUSE / SUSE Linux Enterprise
-```bash
-sudo zypper install -y curl jq bind-utils traceroute openssl util-linux whois netcat-openbsd git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Alpine Linux
-```bash
-sudo apk add curl jq bind-tools traceroute openssl util-linux whois netcat-openbsd git bash
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Gentoo
-```bash
-sudo emerge -av net-misc/curl app-misc/jq net-dns/bind-tools net-analyzer/traceroute dev-libs/openssl sys-apps/util-linux net-misc/whois net-analyzer/netcat
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Void Linux
-```bash
-sudo xbps-install -S curl jq bind-utils traceroute openssl util-linux whois openbsd-netcat git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### macOS (Homebrew)
-```bash
-# Install Homebrew if not already installed
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install dependencies
-brew install curl jq bind openssl coreutils
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### macOS (MacPorts)
-```bash
-sudo port install curl jq bind9 openssl coreutils
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### FreeBSD
-```bash
-sudo pkg install curl jq bind-tools traceroute openssl whois netcat git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### OpenBSD
-```bash
-# Most tools are in base system, install missing ones
-doas pkg_add curl jq git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### NetBSD
-```bash
-sudo pkgin install curl jq bind-tools traceroute openssl whois netcat git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Solaris / illumos / OpenIndiana
-```bash
-sudo pkg install curl jq bind traceroute openssl whois netcat git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Kali Linux / Parrot OS
-```bash
-# Most tools pre-installed
-sudo apt update
-sudo apt install -y curl jq
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Termux (Android)
-```bash
-pkg update
-pkg install -y curl jq bind-tools traceroute openssl whois netcat-openbsd git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### NixOS
-```bash
-# Add to configuration.nix or use nix-shell
-nix-shell -p curl jq bind traceroute openssl whois netcat git
-
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Docker (Any System)
-```bash
-# Use pre-built image
-docker pull asnspy/asnspy-oss:latest
-docker run --rm asnspy/asnspy-oss AS15169
-
-# Or build locally
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-docker build -t asnspy .
-docker run --rm asnspy AS15169
-```
-
-### Windows (WSL2)
-```bash
-# Inside WSL2 Ubuntu/Debian
-sudo apt update
-sudo apt install -y curl jq dnsutils traceroute openssl util-linux whois netcat-openbsd
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-./asnspy.sh AS15169
-```
-
-### Windows (Git Bash / MSYS2)
-```bash
-# In MSYS2 terminal
-pacman -S curl jq bind traceroute openssl util-linux whois netcat git
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-./asnspy.sh AS15169
-```
-
-### Chrome OS (Crostini Linux)
-```bash
-sudo apt update
-sudo apt install -y curl jq dnsutils traceroute openssl util-linux whois netcat-openbsd
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-chmod +x asnspy.sh
-```
-
-### Manual Installation (No Package Manager)
-```bash
-# Download script directly
-curl -O https://raw.githubusercontent.com/ASNSPY/asnspy-oss/main/asnspy.sh
-chmod +x asnspy.sh
-
-# Ensure dependencies are available:
-# - curl, jq, dig/drill, openssl, traceroute, flock, whois (optional)
-# If missing, download from source and compile
-
-./asnspy.sh AS15169
-```
-
-### System-wide Installation (Optional)
-```bash
-# After cloning, install to /usr/local/bin
-sudo cp asnspy.sh /usr/local/bin/asnspy
-sudo chmod +x /usr/local/bin/asnspy
-
-# Now run from anywhere
-asnspy AS15169
-```
-
-## 🎯 Quick Examples
-
-### Basic Recon
-```bash
-# Simple ASN scan
-./asnspy.sh AS15169
-
-# Quick scan (first 50 IPs)
-./asnspy.sh AS15169 --profile quick
-
-# Full deep scan
-./asnspy.sh AS15169 --profile deep
-```
-
-### Security Audit
-```bash
-# Port scan + CVE detection
-./asnspy.sh AS15169 --port-scan --cve
-
-# Complete security assessment
-./asnspy.sh AS15169 --profile security
-
-# Custom security scan
-./asnspy.sh AS15169 \
-  --port-scan --port-scan-top 100 \
-  --tls --version-detect --cve \
-  --http-security --leak-scan
-```
-
-### Network Analysis
-```bash
-# Trace network paths
-./asnspy.sh AS15169 --trace
-
-# TLS certificate analysis
-./asnspy.sh AS15169 --tls --tls-mode all
-
-# Cloud provider detection
-./asnspy.sh AS15169 --cloud-detect
-```
-
-### Advanced Usage
-```bash
-# High performance scan
-./asnspy.sh AS15169 --parallel 100 --profile deep
-
-# Targeted gateway scan
-./asnspy.sh AS15169 --gateway-only --port-scan --tls
-
-# Custom range with filtering
-./asnspy.sh AS15169 \
-  --host-range 1-100 \
-  --internet-only \
-  --parallel 50
-```
-
-## 📊 Output Structure
-
-```
-scans/AS#####_########/
-├── prefixes.txt              # IP prefixes
-├── ptr_results.txt           # IP->hostname mappings (CSV)
-├── domains.txt               # Unique domains
-├── ct_results.txt            # CT log subdomains
-├── traceroute_results.txt    # Network paths (CSV)
-├── tls_certificates.csv      # Certificate data
-├── server_versions.csv       # Detected software
-├── port_scan_results.csv     # Open ports
-├── vulnerabilities.csv       # CVE findings
-├── cloud_providers.csv       # Cloud provider data
-├── http_security.csv         # Security headers
-├── leak_exposures.csv        # Exposed configs
-└── json/                     # JSON exports
-    ├── summary.json
-    ├── prefixes.json
-    ├── vulnerabilities.json
-    └── ...
-```
-
-## 🔧 Configuration
-
-Create `~/.asnspyrc`:
-
-```bash
-# Performance
-PARALLEL=50
-TRACE_PARALLEL=10
-TLS_PARALLEL=20
-
-# Features
-DO_TRACE=1
-DO_TLS=1
-DO_CVE=1
-DO_CLOUD_DETECT=1
-DO_JSON=1
-
-# Filtering
-MODE_INTERNET_ONLY=1
-CVE_MIN_SEVERITY=MEDIUM
-```
-
-Generate example:
-```bash
-./asnspy.sh --generate-config
-```
-
-## 📖 Scan Profiles
-
-| Profile | Description | Use Case |
-|---------|-------------|----------|
-| `quick` | Fast scan, first 50 IPs | Quick recon |
-| `standard` | Balanced (default) | General purpose |
-| `deep` | Everything enabled | Comprehensive audit |
-| `stealth` | Slow, careful | Low-profile scanning |
-| `security` | Vulnerability focus | Security assessment |
-
-## 🎓 Use Cases
-
-### Bug Bounty Hunting
-```bash
-# Find subdomains and vulnerabilities
-./asnspy.sh AS13335 --profile deep --cve-min-severity HIGH
-```
-
-### Network Inventory
-```bash
-# Map organization's infrastructure
-./asnspy.sh AS15169 --trace --cloud-detect
-```
-
-### Security Assessment
-```bash
-# Complete security audit
-./asnspy.sh AS15169 --profile security --json
-```
-
-### Certificate Monitoring
-```bash
-# Find expiring certificates
-./asnspy.sh AS15169 --tls --tls-mode all
-```
-
-## 🔒 Authorization & Legal
-
-⚠️ **IMPORTANT**: Only scan networks you own or have explicit written permission to test.
-
-- Port scanning requires authorization
-- Leak detection requires authorization
-- Unauthorized scanning may violate:
-  - Computer Fraud and Abuse Act (CFAA) - USA
-  - Computer Misuse Act - UK
-  - Similar laws in other jurisdictions
-
-For bug bounty programs: Ensure ASN is within defined scope.
-
-## 🆚 Open Source vs Enterprise
-
-### What's Included in Open Source
-- ✅ All scanning capabilities (unrestricted)
-- ✅ CVE vulnerability detection
-- ✅ Leak/credential detection
-- ✅ JSON export
-- ✅ Parallel processing (unlimited)
-- ✅ All scan modes and profiles
-- ✅ Community support
-
-### Enterprise-Only Features
-- ❌ **ASN Range Scanning** - Scan entire industries
-- ❌ **SIEM Integration** - Splunk, Elasticsearch, QRadar, etc.
-- ❌ **Webhook Notifications** - Slack, Discord, Teams, PagerDuty
-- ❌ **Database Tracking** - PostgreSQL, MySQL with history
-- ❌ **Diff Mode** - Change detection and trending
-- ❌ **Scheduling** - Automated recurring scans
-- ❌ **Multi-user Access** - RBAC and team collaboration
-- ❌ **Compliance Reporting** - PCI-DSS, SOC2, ISO templates
-- ❌ **Priority Support** - SLA-backed assistance
-- ❌ **API Access** - Programmatic integration
-
-**Need enterprise features?** Visit [https://asnspy.com/enterprise](https://asnspy.com/enterprise)
-
-## 💡 Why Upgrade to Enterprise?
-
-### The Challenge
-Open Source ASNSPY gives you **powerful point-in-time scans**. But running it in production requires:
-
-1. **Scheduling System** - Cron + error handling + retries
-2. **Database Schema** - PostgreSQL + migrations
-3. **Data Pipeline** - CSV → DB ingestion
-4. **Change Detection** - Diff algorithms
-5. **SIEM Connectors** - 8 different APIs
-6. **Webhook Handlers** - 5 different formats
-7. **Alert Routing** - Who gets what when
-8. **Web UI** - Dashboards, reports
-9. **Authentication** - SSO, RBAC
-10. **Compliance** - Audit trails, templates
-
-**Engineering Cost**: 6-12 months = $300k-600k  
-**Enterprise License**: $10k/year
-
-### The Solution
-Enterprise ASNSPY provides **continuous security intelligence**:
-
-- Scan 1000s of ASNs automatically
-- Store 12 months of historical data
-- Alert on new vulnerabilities within 15 minutes
-- Track remediation SLAs
-- Generate compliance reports
-- Role-based access for 50+ users
-- Integrate with your security stack
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-### Areas We Need Help
-- Additional CVE data sources
-- Cloud provider detection improvements
-- Performance optimizations
-- Documentation improvements
-- Bug reports and fixes
-
-## 📜 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-Free for personal and educational use. Commercial use permitted.
-
-## 🙏 Credits
-
-Created with ❤️ by the ASNSPY team.
-
-Built on:
-- RIPE NVD API
-- NVD CVE Database
-- Certificate Transparency Logs
-- Team Cymru IP-to-ASN
-
-## 📞 Support
-
-- **Community Support**: [GitHub Issues](https://github.com/ASNSPY/asnspy-oss/issues)
-- **Documentation**: [https://docs.asnspy.com](https://docs.asnspy.com)
-- **Enterprise Sales**: [sales@asnspy.com](mailto:sales@asnspy.com)
-- **Twitter**: [@asnspy](https://twitter.com/asnspy)
-
-## 🗺️ Roadmap
-
-### Near Term
-- [ ] Additional output formats (XML, HTML reports)
-- [ ] IPv6 scanning improvements
-- [ ] Additional CVE data sources
-- [ ] Performance optimizations
-
-### Long Term
-- [ ] GUI interface (community contribution welcome)
-- [ ] Docker container
-- [ ] Kubernetes deployment
-- [ ] Additional language bindings
-
----
-
-**Ready to get started?**
-
-```bash
-git clone https://github.com/ASNSPY/asnspy-oss.git
-cd asnspy-oss
-./asnspy.sh AS15169 --profile deep
-```
-
-For enterprise features and support: **https://asnspy.com/enterprise**
