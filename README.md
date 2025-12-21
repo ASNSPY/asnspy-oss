@@ -130,18 +130,19 @@ ASNSPY combines multiple reconnaissance phases into a single, powerful workflow:
 
 ## 📥 Installation
 
-### Quick Install (Copy-Paste)
+### Quick Install
+
 ```bash
 git clone https://github.com/ASNSPY/asnspy-oss.git
 cd asnspy-oss
 chmod +x asnspy.sh
-./asnspy.sh AS15169  # Scan Google's ASN
+./asnspy.sh AS15169
 ```
 
-**That's it.** No compilation, no virtual environments, no dependency hell.
+ASNSPY runs on any POSIX-compliant system with no compilation required.
 
 ### Supported Systems
-ASNSPY runs on **any POSIX-compliant system**:
+
 - ✅ Linux (Ubuntu, Debian, RHEL, CentOS, Arch, Alpine, Fedora, etc.)
 - ✅ macOS (Homebrew or MacPorts)
 - ✅ BSD (FreeBSD, OpenBSD, NetBSD)
@@ -150,75 +151,64 @@ ASNSPY runs on **any POSIX-compliant system**:
 - ✅ Android (Termux)
 - ✅ Docker (any platform)
 
-**📖 Detailed installation for your system:** [INSTALL.md](https://github.com/ASNSPY/asnspy-oss/blob/main/INSTALL.md)
-
 ### Dependencies
-```
-Required:  curl, jq, dig/drill
-Optional:  openssl (TLS), traceroute (paths), whois (ASN info)
-```
+
+**Required:**
+- `curl` - HTTP client
+- `jq` - JSON processor
+- `dig` or `drill` - DNS lookups
+
+**Optional:**
+- `openssl` - TLS scanning
+- `traceroute` - Path analysis
+- `whois` - ASN metadata
+- `nc` - Banner grabbing
+
+**Complete installation guide:** [INSTALL.md](https://github.com/ASNSPY/asnspy-oss/blob/main/INSTALL.md)
 
 ---
 
 ## 🎬 Quick Start
 
 ### Your First Scan
+
 ```bash
-# Scan Cloudflare's ASN
 ./asnspy.sh AS13335
 ```
 
-**What happens:**
-1. Fetches all IP prefixes owned by AS13335 from RIPE
-2. Enumerates PTR records for discovered IPs
-3. Extracts unique domains from hostnames
-4. Generates comprehensive report
+This command fetches all IP prefixes owned by AS13335 from RIPE, enumerates PTR records for discovered IPs, extracts unique domains from hostnames, and generates a comprehensive report.
 
-**Output:**
+**Output structure:**
 ```
 scans/AS13335_a7f3d9e2/
-├── prefixes.txt          # All IP ranges owned
-├── ptr_results.txt       # IP->hostname mappings
-├── domains.txt           # Unique domains found
+├── prefixes.txt
+├── ptr_results.txt
+├── domains.txt
 └── json/
-    └── summary.json      # Structured data
+    └── summary.json
 ```
 
-**Time:** 5-10 minutes for typical ASN
+**Scan duration:** 5-10 minutes for typical ASN
 
 ### Security Assessment Scan
+
 ```bash
-# Full security audit with vulnerability detection
 ./asnspy.sh AS13335 --profile security
 ```
 
-**What this adds:**
-- ✅ TLS certificate analysis (expiry, weak crypto)
-- ✅ Server version detection (Apache, nginx, IIS)
-- ✅ CVE vulnerability lookup (critical/high only)
-- ✅ HTTP security headers check
-- ✅ Cloud provider identification
-- ✅ Exposed credential scanning
+Adds TLS certificate analysis, server version detection, CVE vulnerability lookup, HTTP security headers check, cloud provider identification, and exposed credential scanning.
 
-**Time:** 20-40 minutes depending on ASN size
+**Scan duration:** 20-40 minutes depending on ASN size
 
 ### Deep Reconnaissance
+
 ```bash
-# Everything ASNSPY can do
 ./asnspy.sh AS13335 --profile deep
 ```
 
-**Includes:**
-- ✅ Network path tracing
-- ✅ Certificate Transparency enumeration
-- ✅ Port scanning (all ports)
-- ✅ Version detection (all services)
-- ✅ CVE detection (all severities)
-- ✅ Complete TLS analysis
-- ✅ Leak detection (configs, credentials)
-- ✅ JSON export
+Comprehensive scan including network path tracing, Certificate Transparency enumeration, port scanning, version detection across all services, CVE detection for all severities, complete TLS analysis, leak detection, and full JSON export.
 
-**Time:** 1-3 hours for large ASN
+**Scan duration:** 1-3 hours for large ASN
 
 ---
 
@@ -229,53 +219,50 @@ scans/AS13335_a7f3d9e2/
 **Scenario:** You're targeting `company.com` on HackerOne.
 
 ```bash
-# Find the company's ASN
 whois company.com | grep -i "origin"
-# Output: Origin AS: AS64496
 
-# Scan their entire infrastructure
 ./asnspy.sh AS64496 --profile security --cve-min-severity HIGH
-
-# What you discover:
-# - staging-api.company.com (not in scope docs)
-# - old-admin.company.com (running vulnerable WordPress)
-# - legacy-vpn.company.com (exposed to internet)
-# - dev-db.company.com (MySQL 5.5 with CVE-2019-2434)
 ```
 
-**Result:** You found 4 subdomains not listed in the scope, including a critical SQLi vulnerability. Submit for bounty.
+**Discoveries:**
+- staging-api.company.com (not documented in scope)
+- old-admin.company.com (running vulnerable WordPress)
+- legacy-vpn.company.com (exposed to internet)
+- dev-db.company.com (MySQL 5.5 with CVE-2019-2434)
 
-**Typical payout:** $500-5000 depending on severity
+You found 4 subdomains not listed in the scope, including a critical SQLi vulnerability.
+
+**Typical bounty payout:** $500-5000 depending on severity
 
 ---
 
 ### 🔍 Attack Surface Discovery
 
-**Scenario:** Your company hired you to "find everything on the internet."
+**Scenario:** Your company hired you to find everything exposed on the internet.
 
 ```bash
-# Scan company ASN
 ./asnspy.sh AS12345 --profile deep --json
 
-# Analyze results
 cat scans/AS12345_*/json/summary.json | jq '.statistics'
-
-# What management sees:
-# {
-#   "prefixes": 42,
-#   "ptr_records": 8934,
-#   "domains": 234,
-#   "tls_certificates": 156,
-#   "vulnerabilities": 23,  # <-- this gets their attention
-#   "leak_exposures": 7     # <-- this gets you a raise
-# }
 ```
 
-**You discover:**
+**Management visibility:**
+```json
+{
+  "prefixes": 42,
+  "ptr_records": 8934,
+  "domains": 234,
+  "tls_certificates": 156,
+  "vulnerabilities": 23,
+  "leak_exposures": 7
+}
+```
+
+**Critical discoveries:**
 - Forgotten dev servers still running
-- Shadow IT (departments running their own infrastructure)
+- Shadow IT infrastructure
 - Acquired companies' infrastructure never integrated
-- Leaked credentials in `.git/config` files
+- Leaked credentials in configuration files
 - Expired TLS certificates on payment systems
 
 **Business impact:** Prevent breach, ensure compliance, reduce attack surface
@@ -287,11 +274,8 @@ cat scans/AS12345_*/json/summary.json | jq '.statistics'
 **Scenario:** Evaluating a SaaS vendor before signing $500k contract.
 
 ```bash
-# Find their ASN
 whois vendor.com | grep origin
-# AS: AS54113
 
-# Security assessment
 ./asnspy.sh AS54113 \
   --profile security \
   --tls \
@@ -299,110 +283,106 @@ whois vendor.com | grep origin
   --leak-scan \
   --cve-min-severity MEDIUM
 
-# Review findings:
 cat scans/AS54113_*/vulnerabilities.csv
 cat scans/AS54113_*/leak_exposures.csv
 cat scans/AS54113_*/http_security.csv
 ```
 
-**Red flags you find:**
-- ❌ Database backups accessible without auth
-- ❌ Admin panels with default credentials
-- ❌ Certificates expired 6 months ago
-- ❌ Missing security headers on payment pages
-- ❌ 12 CRITICAL CVEs in production
+**Red flags discovered:**
+- Database backups accessible without authentication
+- Admin panels with default credentials
+- Certificates expired 6 months ago
+- Missing security headers on payment pages
+- 12 CRITICAL CVEs in production systems
 
-**Decision:** Don't sign contract, or negotiate security remediation clauses
+**Decision:** Negotiate security remediation clauses or walk away from contract
 
 ---
 
-### 🌐 Competitor Intelligence (Legal)
+### 🌐 Competitor Intelligence
 
-**Scenario:** Understanding competitor's infrastructure for business intelligence.
+**Scenario:** Understanding competitor infrastructure for business intelligence.
 
 ```bash
-# Map competitor infrastructure
 ./asnspy.sh AS99999 --cloud-detect --trace
 
-# Discover:
-# - They're 100% AWS (easy to estimate costs)
-# - Using Cloudflare CDN (public-facing)
-# - Have infrastructure in 3 regions (US, EU, APAC)
-# - Running 50% more servers than last quarter (scaling up)
-
-# Analyze domains
 cat scans/AS99999_*/domains.txt
-
-# What you learn:
-# - new-product.competitor.com (unreleased product)
-# - enterprise-api.competitor.com (B2B pivot?)
-# - jobs-internal.competitor.com (hiring system)
 ```
+
+**Infrastructure analysis:**
+- 100% AWS infrastructure (enables cost estimation)
+- Using Cloudflare CDN for public-facing services
+- Infrastructure in 3 regions: US, EU, APAC
+- Running 50% more servers than last quarter (scaling indicators)
+
+**Domain analysis reveals:**
+- new-product.competitor.com (unreleased product)
+- enterprise-api.competitor.com (B2B pivot)
+- jobs-internal.competitor.com (hiring infrastructure)
 
 **Business value:** Strategic intelligence, market positioning, competitive analysis
 
-**Note:** This is passive reconnaissance using public data. Legal in most jurisdictions.
+This reconnaissance uses public data and is legal in most jurisdictions.
 
 ---
 
 ### 📡 Network Architecture Analysis
 
-**Scenario:** Understanding a network's design before a pentest.
+**Scenario:** Understanding network design before a penetration test.
 
 ```bash
-# Map network topology
 ./asnspy.sh AS20940 --trace --trace-mode all
 
-# What traceroute reveals:
-# - Primary transit: Level3 (AS3356)
-# - Backup: Cogent (AS174)  
-# - Peering points: 4 major IXPs
-# - Internal segmentation visible via routing
-
-# Review topology
 cat scans/AS20940_*/traceroute_topology.txt
 ```
 
-**Pentest value:** 
-- Understand network design
+**Traceroute reveals:**
+- Primary transit: Level3 (AS3356)
+- Backup transit: Cogent (AS174)
+- Peering points: 4 major IXPs
+- Internal segmentation visible via routing patterns
+
+**Penetration test value:**
+- Understand network design and architecture
 - Identify single points of failure
 - Find alternate routes for resilience testing
-- Map trust boundaries
+- Map trust boundaries and segmentation
 
 ---
 
 ### 🔐 Certificate Hygiene Audit
 
-**Scenario:** Your security team needs to track certificate expiry across ALL infrastructure.
+**Scenario:** Security team needs to track certificate expiry across all infrastructure.
 
 ```bash
-# Scan for TLS certificates
 ./asnspy.sh AS30000 --tls --tls-mode all
 
-# Find problems
 cat scans/AS30000_*/tls_issues.txt
-
-# Typical findings:
-# EXPIRED CERTIFICATES: 12
-#   10.20.30.40 - vpn.company.com (expired 45 days ago)
-#   10.20.30.41 - mail.company.com (expired 12 days ago)
-#
-# EXPIRING SOON (<30 days): 8
-#   10.20.30.50 - api.company.com (23 days remaining)
-#   10.20.30.51 - admin.company.com (15 days remaining)
-#
-# SELF-SIGNED CERTIFICATES: 34
-#   (internal dev servers - should not be public)
-#
-# WEAK KEY SIZES: 3
-#   10.20.30.60 - RSA 1024 bits (should be 2048+)
 ```
 
-**Remediation:** 
+**Typical findings:**
+
+```
+EXPIRED CERTIFICATES: 12
+  10.20.30.40 - vpn.company.com (expired 45 days ago)
+  10.20.30.41 - mail.company.com (expired 12 days ago)
+
+EXPIRING SOON (<30 days): 8
+  10.20.30.50 - api.company.com (23 days remaining)
+  10.20.30.51 - admin.company.com (15 days remaining)
+
+SELF-SIGNED CERTIFICATES: 34
+  Internal dev servers that should not be publicly accessible
+
+WEAK KEY SIZES: 3
+  10.20.30.60 - RSA 1024 bits (should be 2048+)
+```
+
+**Remediation actions:**
 - Renew expired certificates immediately
-- Automate renewal for expiring certs
-- Remove self-signed certs from production
-- Upgrade weak crypto
+- Automate renewal for expiring certificates
+- Remove self-signed certificates from production
+- Upgrade weak cryptography
 
 ---
 
@@ -411,28 +391,24 @@ cat scans/AS30000_*/tls_issues.txt
 **Scenario:** Investigating a malicious domain's infrastructure.
 
 ```bash
-# Find the ASN hosting the malicious domain
 whois malicious-site.com | grep -i origin
-# AS: AS12876 (sketchy hosting provider)
 
-# Map entire infrastructure
 ./asnspy.sh AS12876 --profile deep
 
-# Pivot analysis:
 cat scans/AS12876_*/domains.txt | grep -E "phishing|scam|fake"
-
-# What you find:
-# - 200+ suspicious domains on same ASN
-# - Same TLS certificate across 50 domains (infrastructure reuse)
-# - All registered in last 30 days
-# - Hosting pattern matches known threat actor
 ```
 
-**Use in investigation:**
+**Investigation findings:**
+- 200+ suspicious domains on same ASN
+- Same TLS certificate across 50 domains (infrastructure reuse)
+- All domains registered in last 30 days
+- Hosting pattern matches known threat actor
+
+**Investigation value:**
 - Link multiple campaigns to same threat actor
 - Find additional IOCs (indicators of compromise)
 - Report entire ASN to hosting provider
-- Block at network level
+- Implement network-level blocking
 
 ---
 
@@ -441,22 +417,16 @@ cat scans/AS12876_*/domains.txt | grep -E "phishing|scam|fake"
 ### Custom Scans
 
 ```bash
-# High-speed scan (100 parallel operations)
 ./asnspy.sh AS15169 --parallel 100 --profile quick
 
-# Stealth scan (slow and careful)
 ./asnspy.sh AS15169 --profile stealth
 
-# Only scan gateway IPs (.1 and .254)
 ./asnspy.sh AS15169 --gateway-only --port-scan
 
-# Custom IP range within ASN
 ./asnspy.sh AS15169 --host-range 1-50 --prefix-range 8-8
 
-# Specific ports only
 ./asnspy.sh AS15169 --port-scan --port-scan-ports "22,80,443,3389"
 
-# Top 100 most common ports (fast)
 ./asnspy.sh AS15169 --port-scan --port-scan-top 100
 ```
 
@@ -490,19 +460,14 @@ cat scans/AS12876_*/domains.txt | grep -E "phishing|scam|fake"
 ### Filtering & Optimization
 
 ```bash
-# Skip "dead" octets (.0, .127, .255)
 ./asnspy.sh AS15169 --skip-dead
 
-# Internet-facing only (skip .0, .1, .127, .254, .255)
 ./asnspy.sh AS15169 --internet-only
 
-# Strict valid hosts only (.2 through .254)
 ./asnspy.sh AS15169 --strict-valid
 
-# IPv4 only
 ./asnspy.sh AS15169 --ipv4
 
-# IPv6 only  
 ./asnspy.sh AS15169 --ipv6
 ```
 
@@ -538,31 +503,23 @@ scans/AS15169_a7f3d9e2/
 ### Analysis Examples
 
 ```bash
-# Find all CRITICAL vulnerabilities
 awk -F, '$6=="CRITICAL"' scans/AS*/vulnerabilities.csv
 
-# List all expired TLS certificates
 awk -F, '$13=="expired"' scans/AS*/tls_certificates.csv
 
-# Find exposed credentials
 grep -i "password\|apikey\|secret" scans/AS*/leak_exposures.csv
 
-# Count unique domains
 wc -l scans/AS*/domains.txt
 
-# Export to Splunk/Elasticsearch
 cat scans/AS*/json/vulnerabilities.json | \
   curl -X POST http://splunk:8088/services/collector \
     -H "Authorization: Splunk YOUR_TOKEN" \
     -d @-
 
-# Create Excel report
 csvtool readable scans/AS*/vulnerabilities.csv > report.txt
 
-# Find all self-signed certificates
 awk -F, '$21=="yes"' scans/AS*/tls_certificates.csv
 
-# List cloud providers
 sort scans/AS*/cloud_providers.csv | uniq -c
 ```
 
@@ -571,94 +528,92 @@ sort scans/AS*/cloud_providers.csv | uniq -c
 ## 🔧 Configuration
 
 ### Config File
+
 Create `~/.asnspyrc` to save preferences:
 
 ```bash
-# Generate example
 ./asnspy.sh --generate-config
 
-# Edit
 nano ~/.asnspyrc
 ```
 
 **Example configuration:**
+
 ```bash
-# Performance
-PARALLEL=50                    # Global parallelization
-TRACE_PARALLEL=10              # Traceroute parallel
-TLS_PARALLEL=20                # TLS scans parallel
+PARALLEL=50
+TRACE_PARALLEL=10
+TLS_PARALLEL=20
 
-# Default Features
-DO_TRACE=1                     # Always trace paths
-DO_TLS=1                       # Always scan TLS
-DO_CVE=1                       # Always check CVEs
-DO_JSON=1                      # Always export JSON
+DO_TRACE=1
+DO_TLS=1
+DO_CVE=1
+DO_JSON=1
 
-# Filtering
-MODE_INTERNET_ONLY=1           # Skip internal IPs
-CVE_MIN_SEVERITY=MEDIUM        # Only MEDIUM+ CVEs
+MODE_INTERNET_ONLY=1
+CVE_MIN_SEVERITY=MEDIUM
 
-# Scan Profile (default)
-SCAN_PROFILE=security          # Use security profile by default
+SCAN_PROFILE=security
 ```
 
 **Config locations (priority order):**
 1. `./.asnspyrc` (current directory)
-2. `~/.asnspyrc` (home directory)  
+2. `~/.asnspyrc` (home directory)
 3. `/etc/asnspy.conf` (system-wide)
 
 ---
 
 ## 🛡️ Legal & Ethical Use
 
-### ⚠️ Authorization Required
+### Authorization Required
 
-**You MUST have authorization before scanning:**
-- ✅ Your own infrastructure
-- ✅ Client infrastructure (written permission)
-- ✅ Bug bounty programs (within scope)
-- ✅ Penetration test engagements (contracted)
+You must have explicit authorization before scanning:
 
-**Unauthorized scanning may violate:**
-- Computer Fraud and Abuse Act (CFAA) - USA
-- Computer Misuse Act - UK
+- Your own infrastructure
+- Client infrastructure with written permission
+- Bug bounty programs within defined scope
+- Penetration test engagements with signed contracts
+
+Unauthorized scanning may violate:
+- Computer Fraud and Abuse Act (CFAA) in the United States
+- Computer Misuse Act in the United Kingdom
 - Similar laws in other jurisdictions
 
-**Penalties:** Fines and imprisonment
+Penalties include fines and imprisonment.
 
 ### Responsible Use Guidelines
 
-**DO:**
-- ✅ Read bug bounty scope carefully
-- ✅ Get written authorization for pentests
-- ✅ Respect rate limits
-- ✅ Follow responsible disclosure
-- ✅ Stop if asked by the target
+**Best practices:**
+- Read bug bounty scope documentation carefully
+- Obtain written authorization for penetration tests
+- Respect rate limits and system resources
+- Follow responsible disclosure practices
+- Stop scanning if requested by the target
 
-**DON'T:**
-- ❌ Scan without permission
-- ❌ Exploit vulnerabilities you find (without authorization)
-- ❌ Share credentials you discover
-- ❌ Cause damage or disruption
-- ❌ Exceed bug bounty scope
+**Prohibited activities:**
+- Scanning without authorization
+- Exploiting discovered vulnerabilities without permission
+- Sharing credentials discovered during scans
+- Causing damage or service disruption
+- Exceeding authorized bug bounty scope
 
 ### Bug Bounty Best Practices
 
-1. **Verify ASN is in scope**
-   - Read program scope carefully
-   - Confirm ASN belongs to target
-   - Check for out-of-scope subsidiaries
+**Verify scope:**
+- Confirm ASN belongs to target organization
+- Check for out-of-scope subsidiaries and acquisitions
+- Validate IP ranges against program documentation
 
-2. **Start passive**
-   - Begin with `--profile quick`
-   - Validate findings manually
-   - Escalate to active scans carefully
+**Start passive:**
+- Begin with `--profile quick` for initial reconnaissance
+- Validate findings manually before active scanning
+- Escalate to deeper scans only when appropriate
 
-3. **Report responsibly**
-   - Include ASNSPY output as evidence
-   - Provide reproduction steps
-   - Don't exfiltrate sensitive data
-   - Follow program disclosure timeline
+**Report responsibly:**
+- Include ASNSPY output as evidence
+- Provide clear reproduction steps
+- Do not exfiltrate sensitive data
+- Follow program disclosure timeline
+- Report through official channels only
 
 ---
 
@@ -685,80 +640,57 @@ ASNSPY Open Source is **not a demo** - it's a complete, professional tool:
 
 **No artificial limits. No crippled features. No pay walls.**
 
-### Enterprise Features (Not in Open Source)
+### Enterprise Features
 
-Enterprise ASNSPY transforms point-in-time scans into **continuous security intelligence**:
+Enterprise ASNSPY transforms point-in-time scans into continuous security intelligence:
 
-#### 🎯 Scale & Automation
-- **ASN Range Scanning** - Scan AS13335-AS99999 in one command (scan entire industries)
-- **Scheduling** - Automated daily/weekly scans with error handling
-- **API Access** - RESTful API for programmatic integration
-- **Bulk Operations** - Campaign management for hundreds of targets
+**Scale & Automation**
+- ASN Range Scanning: Scan AS13335-AS99999 in one command
+- Scheduling: Automated daily/weekly scans with error handling
+- API Access: RESTful API for programmatic integration
+- Bulk Operations: Campaign management for hundreds of targets
 
-#### 🔗 Enterprise Integration  
-- **SIEM Connectors** - Splunk, Elasticsearch, QRadar, ArcSight, Graylog, Sumo Logic (8 platforms)
-- **Webhook Notifications** - Slack, Discord, Teams, PagerDuty, custom
-- **Database Backend** - PostgreSQL, MySQL with 12+ months history
-- **SSO/RBAC** - SAML, OAuth, role-based access control
+**Enterprise Integration**
+- SIEM Connectors: Splunk, Elasticsearch, QRadar, ArcSight, Graylog, Sumo Logic
+- Webhook Notifications: Slack, Discord, Teams, PagerDuty, custom endpoints
+- Database Backend: PostgreSQL, MySQL with 12+ months historical data
+- SSO/RBAC: SAML, OAuth, role-based access control
 
-#### 📈 Intelligence & Analytics
-- **Diff Mode** - Automated change detection between scans
-- **Trending** - Historical analysis and pattern recognition
-- **Asset Inventory** - Centralized database of all discovered infrastructure
-- **Vulnerability Tracking** - Track from discovery → remediation
-- **Analytics Dashboard** - Web-based visualization
+**Intelligence & Analytics**
+- Diff Mode: Automated change detection between scans
+- Trending: Historical analysis and pattern recognition
+- Asset Inventory: Centralized database of discovered infrastructure
+- Vulnerability Tracking: Track findings from discovery through remediation
+- Analytics Dashboard: Web-based visualization and reporting
 
-#### 📋 Compliance & Reporting
-- **Compliance Templates** - PCI-DSS, SOC2, ISO 27001, NIST
-- **PDF Reports** - Automated executive/technical report generation
-- **Audit Trails** - Complete activity logging for compliance
-- **SLA Tracking** - Measure mean-time-to-remediation
+**Compliance & Reporting**
+- Compliance Templates: PCI-DSS, SOC2, ISO 27001, NIST
+- PDF Reports: Automated executive and technical report generation
+- Audit Trails: Complete activity logging for compliance
+- SLA Tracking: Measure mean-time-to-remediation
 
-#### 🎫 Support
-- **Priority Support** - Email/phone with SLA
-- **Training** - Live onboarding sessions
-- **Custom Integrations** - Professional services available
-- **Dedicated CSM** - Customer success manager
+**Support**
+- Priority Support: Email and phone with SLA
+- Training: Live onboarding sessions
+- Custom Integrations: Professional services available
+- Dedicated CSM: Customer success manager
 
 ### Why Upgrade to Enterprise?
 
-**The Challenge:**
-Open Source gives you powerful scans. But running it in production requires:
+**Manual approach with Open Source:**
+- 18 hours per week of manual work
+- Annual cost: $117,000 (at $125/hour)
 
-1. Building a scheduler (cron + error handling)
-2. Database schema design and migrations
-3. Data ingestion pipelines (CSV → DB)
-4. SIEM connector development (8 different APIs)
-5. Webhook notification system (5 different formats)
-6. Alert routing logic
-7. Web UI for dashboards
-8. Authentication/authorization system
-9. Compliance reporting templates
-10. Change detection algorithms
+**Automated Enterprise approach:**
+- 0 hours per week
+- Annual cost: $10,000
 
-**Engineering Cost:** 6-12 months of dev time = **$300,000-$600,000**
+**Annual savings: $107,000**
 
-**Or:** Enterprise license = **$10,000/year**
-
-### Real ROI Example
-
-**Mid-sized security team (8 people) scenario:**
-
-**With Open Source:**
-- Run scans manually: 8 hours/week
-- Parse results manually: 4 hours/week  
-- Generate reports: 4 hours/week
-- Track changes: 2 hours/week (spreadsheets)
-- **Total: 18 hours/week = $117,000/year** (at $125/hr)
-
-**With Enterprise:**
-- Automated scans: 0 hours
-- SIEM integration: 0 hours  
-- Auto-generated reports: 0 hours
-- Automated change detection: 0 hours
-- **Total: 0 hours/week = $10,000/year license**
-
-**Savings: $107,000/year + better security posture**
+Alternatively, building these capabilities in-house requires:
+- 6-12 months of development time
+- Engineering cost: $300,000-$600,000
+- Ongoing maintenance and updates
 
 **Learn more:** [https://asnspy.com/enterprise](https://asnspy.com/enterprise)
 
@@ -876,19 +808,14 @@ ASNSPY is built on the shoulders of giants:
 ## ⚡ Quick Reference
 
 ```bash
-# Basic scan
 ./asnspy.sh AS15169
 
-# Security audit
 ./asnspy.sh AS15169 --profile security
 
-# Deep scan (everything)
 ./asnspy.sh AS15169 --profile deep
 
-# Fast scan (first 50 IPs)
 ./asnspy.sh AS15169 --profile quick
 
-# Custom scan
 ./asnspy.sh AS15169 \
   --parallel 100 \
   --port-scan --port-scan-top 1000 \
@@ -896,10 +823,8 @@ ASNSPY is built on the shoulders of giants:
   --leak-scan --http-security \
   --json
 
-# View help
 ./asnspy.sh --help
 
-# Generate config
 ./asnspy.sh --generate-config
 ```
 
@@ -907,7 +832,7 @@ ASNSPY is built on the shoulders of giants:
 
 <div align="center">
 
-**Ready to discover your attack surface?**
+**Discover your attack surface**
 
 ```bash
 git clone https://github.com/ASNSPY/asnspy-oss.git
@@ -915,7 +840,7 @@ cd asnspy-oss
 ./asnspy.sh AS15169 --profile deep
 ```
 
-**Star this repo if it helps your security research!** ⭐
+**Star this repository to support the project** ⭐
 
 [⬆ Back to Top](#asnspy---open-source-edition)
 
