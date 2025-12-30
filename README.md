@@ -415,6 +415,78 @@ cat scans/AS12876_*/domains.txt | grep -E "phishing|scam|fake"
 
 ## 🎓 Advanced Usage
 
+### Parallel Processing for Performance
+
+ASNSPY supports parallel processing across all scan phases for dramatic speed improvements:
+
+```bash
+# Default: Serial scanning (safest, slowest)
+./asnspy.sh AS15169
+
+# Global parallel - applies to all phases
+./asnspy.sh AS15169 --parallel 50
+
+# Phase-specific parallel (fine-grained control)
+./asnspy.sh AS15169 \
+  --parallel 100 \
+  --trace-parallel 10 \
+  --tls-parallel 20 \
+  --version-parallel 20 \
+  --port-scan-parallel 100
+
+# Speed-optimized scan
+./asnspy.sh AS15169 --profile quick --parallel 100
+```
+
+**Performance Guidelines:**
+
+| Concurrency | Use Case | Scan Speed | Network Impact |
+|------------|----------|------------|----------------|
+| `--parallel 1` | Default, safest | ~10 IPs/min | Minimal |
+| `--parallel 10` | Small networks | ~50 IPs/min | Low |
+| `--parallel 50` | Medium networks | ~200 IPs/min | Moderate |
+| `--parallel 100` | Large networks | ~400 IPs/min | High |
+| `--parallel 200+` | High-performance | ~800 IPs/min | Very High |
+
+**When to use parallel:**
+- ✅ **Bug bounty hunting** - Speed matters for first discovery
+- ✅ **Large ASNs** - 10,000+ IPs take hours without parallel
+- ✅ **Quick reconnaissance** - Initial survey of attack surface
+- ✅ **Your own infrastructure** - No stealth concerns
+
+**When NOT to use high parallel:**
+- ❌ **Stealth operations** - Use `--profile stealth` (parallel=1)
+- ❌ **Rate-limited targets** - Risk triggering WAF/IPS
+- ❌ **Shared infrastructure** - Respect server resources
+- ❌ **Unstable networks** - Packet loss increases with concurrency
+
+**Example timing:**
+
+```bash
+# AS15169 (Google) has ~8,000 prefixes
+
+# Serial scan (parallel=1)
+# Time: 4-6 hours
+./asnspy.sh AS15169 --profile security
+
+# Moderate parallel (parallel=50)
+# Time: 30-45 minutes
+./asnspy.sh AS15169 --profile security --parallel 50
+
+# High parallel (parallel=100)
+# Time: 15-25 minutes
+./asnspy.sh AS15169 --profile security --parallel 100
+```
+
+**Best practice:**
+```bash
+# Start conservative, increase if needed
+./asnspy.sh AS15169 --profile security --parallel 20
+
+# Monitor network impact, adjust accordingly
+# If no issues, increase to 50 or 100
+```
+
 ### Custom Scans
 
 ```bash
@@ -875,9 +947,9 @@ We welcome contributions from the security community.
 
 ### Enterprise Support
 - **Website:** [https://asnspy.com](https://asnspy.com)
-- **Sales:** [sales@asnspy.com](mailto:sales@asnspy.com)
+- **Contact:** [contact@asnspy.com](mailto:contact@asnspy.com)
+- **Instagram:** [@asn_spy](https://instagram.com/asn_spy)
 - **Documentation:** [https://docs.asnspy.com](https://docs.asnspy.com)
-- **Twitter:** [@asnspy](https://twitter.com/asnspy)
 
 ---
 
